@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <div th:replace="fragment :: risorse"></div>
+   
+    <title>Le nostre pizze</title>
+</head>
+<body>
+    <div th:replace="fragment :: nav(homePage)"></div>
+    
+    <div class="container">
+    	<h1 class="text-center">Ecco la lista delle nostre bellissime pizze</h1>
+    	<a class="btn btn-dark mb-5" th:href="@{/edit}">Aggiungi una nuova Pizza</a>
+    	<div th:if="${#lists.isEmpty(PizzaList)}">
+    	</div>
+        <h1>Mi dispiace ma la lista è vuota!</h1>
+      
+      <th:block th:if="${successMessage != null && successMessage != ''}">
+  		<div  class="alert alert-success" th:text="${successMessage}"></div>
+  	</th:block>
+      <div th:unless="${#lists.isEmpty(PizzaList)}">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-dark">Nome</th>
+              <th scope="col" class="table-dark">Descrizione</th>
+              <th scope="col" class="table-dark">Prezzo</th>
+              <th scope="col" class="table-dark">Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="p : ${PizzaList} ">
+              <td class="table-success" th:text="${p.getNome()}"></td>
+              <td class="table-danger" th:text="${p.getDescrizione()}"></td>
+              <td class="table-warning" th:text="${p.getPrezzo} + '€'"></td>
+              <td class="table-dark">
+              <a class="btn btn-primary" title="Cancella" th:href="@{|/delete/${p.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+              <a class="btn btn-primary" title="Modifica" th:href="@{|/update/${p.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-pencil"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    	
+    </div>
+    </div>
+    <div th:replace="fragment :: footer"> </div>
+</body>
+</html>

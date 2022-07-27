@@ -1,0 +1,132 @@
+<th:block th:fragment="risorse">
+    <!-- Required meta tags -->
+    <!-- uso il th block per creare un blocco interno per separare le parti di codice -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/9d7208a428.js" crossorigin="anonymous"></script>
+	</th:block>
+
+    <th:block th:fragment="nav(current)">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+  <img src="https://img.freepik.com/premium-vector/melting-pizza-logo-pizzeria-restaurant-with-melting-cheese-logo-icon-template_8580-559.jpg?w=2000" style="height:60px"  class="px-3" alt="...">
+    <a class="navbar-brand" href="/">Zanna's Pizza'</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" th:classAppend="${current == 'pizza'} ? active : not-active" aria-current="page" href="/pizza">Le nostre Pizze</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:classAppend="${current == 'lavora con noi'} ? active : not-active" href="/pizza">Lavora con noi!</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:classAppend="${current == 'contatti'} ? active : not-active" href="/">Contatti</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+    </th:block>
+    
+    <th:block th:fragment="footer">
+<!-- Footer -->
+<footer class="bg-dark text-center text-lg-start bg-light pt-2 text-muted">
+  <!-- Section: Links  -->
+  <section class="" >
+    <div class="container text-center text-md-start mt-5 ">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Pizzeria Zanna's Pizza
+          </h6>
+          <p>
+            Le migliori pizze napoletane solo da noi, siamo certificati e lavoriamo con il cuore!
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            I nostri migliori corsi
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Pizze Gourmet</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Pizze senza Glutine</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Altre pizzerie partner</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Informazioni su Napoli</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Link utili
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Prezzi</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Opzioni</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Ordina Online</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Aiuto!</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            I nostri contatti:
+          </h6>
+          <p><i class="fas fa-home me-3"></i> Via G Marconi 14, 80019 Qualiano NA</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            pizzeriazanna@pizzeriedinapoli.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> 081 4584 4854</p>
+          <p><i class="fas fa-print me-3"></i> 331 7584 754</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="/">www.zannapizza.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+ </th:block>
