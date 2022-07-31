@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <div th:replace="fragment :: risorse"></div>
+   
+    <title>Le nostre pizze</title>
+</head>
+<body  style="background-color: #ceced7;">
+    <div th:replace="fragment :: nav(ingredienti)"></div>
+    
+    <div class="container">
+    
+    	<a class="btn btn-dark my-5" th:href="@{/ingredienti/edit}">Aggiungi un nuovo Ingrediente</a>
+    	<div th:if="${#lists.isEmpty(IngredientiList)}">
+    	<h1>Mi dispiace ma la lista è vuota!</h1>
+    	</div>
+        
+      
+      <th:block th:if="${successMessage != null && successMessage != ''}">
+  		<div  class="alert alert-success" th:text="${successMessage}"></div>
+  	</th:block>
+      <div th:unless="${#lists.isEmpty(IngredientiList)}">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-dark">Nome ingrediente</th>
+              <th scope="col" class="table-dark">Azione</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="ing : ${IngredientiList} ">
+              <td class="table-success" th:text="${ing.getNome()}"></td>
+              <td class="table-info">
+              <a class="btn btn-dark d-block mb-3" title="Modifica" th:href="@{|/ingredienti/update/${ing.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
+              <a class="btn btn-danger d-block mb-3" width:"100%" title="Cancella" th:href="@{|/ingredienti/delete/${ing.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div th:replace="fragment :: footer"> </div>
+</body>
+</html>

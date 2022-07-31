@@ -2,48 +2,44 @@
 <html lang="en">
 <head>
    <div th:replace="fragment :: risorse"></div>
-   
     <title>Le nostre pizze</title>
 </head>
-<body>
+<body  style="background-color: #ceced7;">
     <div th:replace="fragment :: nav(homePage)"></div>
     
     <div class="container">
-    	<h1 class="text-center">Ecco la lista delle nostre bellissime pizze</h1>
-    	<a class="btn btn-dark mb-5" th:href="@{/edit}">Aggiungi una nuova Pizza</a>
-    	<div th:if="${#lists.isEmpty(PizzaList)}">
-    	</div>
-        <h1>Mi dispiace ma la lista è vuota!</h1>
-      
-      <th:block th:if="${successMessage != null && successMessage != ''}">
-  		<div  class="alert alert-success" th:text="${successMessage}"></div>
-  	</th:block>
-      <div th:unless="${#lists.isEmpty(PizzaList)}">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col" class="table-dark">Nome</th>
-              <th scope="col" class="table-dark">Descrizione</th>
-              <th scope="col" class="table-dark">Prezzo</th>
-              <th scope="col" class="table-dark">Azioni</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="p : ${PizzaList} ">
-              <td class="table-success" th:text="${p.getNome()}"></td>
-              <td class="table-danger" th:text="${p.getDescrizione()}"></td>
-              <td class="table-warning" th:text="${p.getPrezzo} + '€'"></td>
-              <td class="table-dark">
-              <a class="btn btn-primary" title="Cancella" th:href="@{|/delete/${p.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
-              <a class="btn btn-primary" title="Modifica" th:href="@{|/update/${p.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-pencil"></i></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    
     	
-    </div>
+    	    	<a class="btn btn-dark my-5" th:href="@{/edit}">Aggiungi una nuova Pizza</a>
+  <div class="row justify-content-md-center">
+    	<div class="card col-3 m-4 " th:each="p : ${PizzaList} ">
+  <img th:if="${p.immagini.size() == 0}" src="img/pizzacard1.jpg" class="card-img-top" alt="pizza">
+   <div th:each="img : ${p.immagini} ">
+   	<img th:src="@{|/immagini/${img.id}/content|}" class="img-fluid image-container" alt="">
+
+   </div>
+  <div class="card-body">
+  
+    <h2 class="card-title text-center" th:text="${p.nome}"></h2>
+  
+    <hr>
+    <h4 class="card-title text-center" th:text="'Prezzo: ' + ${p.getPrezzo} + '€'"></h4>
+    <hr>
+    <p class="card-text" th:text="${p.getDescrizione()}"></p>
+    <hr>
+    <h3 >Ingredienti</h3>
+    <ul>
+	  					<li th:each="in : ${p.ingredienti}" th:text="${in.nome}"></li>
+	  				</ul>
+    <hr>
+    <h3 class="text-center mb-3">Azioni</h3>
+    <a class="btn btn-warning d-block mb-3" title="Inserisci immagine"th:href="@{|/immagini/list/${p.getId()}|}"><i class="fa-solid fa-image"></i></a>
+    <a class="btn btn-dark d-block mb-3" title="Modifica" th:href="@{|/edit/${p.getId()}|}"><i class="fa-solid fa-pencil"></i></a>
+    <a class="btn btn-danger d-block mb-3" width:"100%" title="Cancella" th:href="@{|/delete/${p.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+    
+  </div>
+</div>
+  </div>
     </div>
     <div th:replace="fragment :: footer"> </div>
 </body>

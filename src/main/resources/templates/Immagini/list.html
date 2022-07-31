@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragment :: risorse"></div>
+<title>Pizza Immagini</title>
+</head>
+<body>
+	<div th:replace="fragment :: nav(immagini)"></div>
+	<div class="container">
+		<h1>Immagini per la pizza: </h1>
+		<h2 class="text-muted" th:text="${immagineForm.pizza.nome}"></h2>
+		<hr />
+		<div class="col-6">
+		<!-- Inizio Form (mappata su un oggetto di tipo ImageForm, non Image -->
+			<form 
+			th:if="${listaImmagini.size() == 0}"
+				id="form-img" 
+				th:object="${immagineForm}"
+				th:action="@{/immagini/save}" 
+				method="POST"
+				enctype="multipart/form-data"
+				>
+				<input type="hidden" th:field="*{pizza}">
+				<div class="mb-3">
+				  <label for="contentMultipart" class="form-label">Aggiungi immagine</label>
+				  <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+				</div>
+				<button class="btn btn-dark" type="submit">Salva</button>
+			</form>
+			<!--  fine form -->
+			<!--  inizio lista (model attribute imageList) -->
+			<div class="row">
+				<div class="col-5" th:each="img : ${listaImmagini}">
+					<img th:src="@{|/immagini/${img.id}/content|}" class="img-fluid" alt=""> 
+					<a class="btn btn-danger d-block my-2" width:"100%" title="Cancella" th:href="@{|/immagini/delete/${img.getId()}|}" onclick="return confirm('Sei sicuro?') "><i class="fa-solid fa-trash-can"></i></a>
+				</div>
+			</div>
+			<a href="/pizza" class="mt-4 btn btn-dark">Torna alle pizze</a>
+			<!--  fine lista -->
+		</div>
+	</div>
+
+    <div th:replace="fragment :: footer"> </div>
+</body>
+</html>

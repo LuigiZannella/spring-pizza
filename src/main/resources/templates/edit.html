@@ -46,8 +46,14 @@
   						<li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}">
   					</ul>
   				</div>
-</div>
-<div>
+
+    	<div class="col-4">
+				<h4>Ingredienti</h4>
+				<div class="form-check" th:each="ing : ${ingredienti}">
+				  <input class="form-check-input" th:field="*{ingredienti}" type="checkbox" th:id="|ingredienti_${ing.id}|" th:value="${ing.id}">
+				  <label class="form-check-label" th:for="|ingredienti_${ing.id}|" th:text="${ing.nome}"></label>
+				</div>
+    	<div>
   				<button type="submit" class="btn btn-primary mt-3">Save</button>
   				<a class="btn btn-primary mt-3" href="/">Cancel</a>
   			</div>
